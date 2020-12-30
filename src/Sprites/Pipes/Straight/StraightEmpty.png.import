@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Empty.png-b34be09340ec7d4575e69652477c8bb3.stex"
+path="res://.import/StraightEmpty.png-e8a47d55e203ab61d1bae164f8654c4e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Pipes/Straight/Empty.png"
-dest_files=[ "res://.import/Empty.png-b34be09340ec7d4575e69652477c8bb3.stex" ]
+source_file="res://Sprites/Pipes/Straight/StraightEmpty.png"
+dest_files=[ "res://.import/StraightEmpty.png-e8a47d55e203ab61d1bae164f8654c4e.stex" ]
 
 [params]
 
