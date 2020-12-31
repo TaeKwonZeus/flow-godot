@@ -7,5 +7,11 @@ onready var grid = get_parent()
 
 
 func _ready():
-	print("Ready!")
 	grid.blocks[self] = position
+
+
+func _process(_delta):
+	var statedPos = grid.blocks[self]
+
+	if statedPos != position:
+		position = statedPos

@@ -2,7 +2,9 @@ class_name Player
 extends Block
 
 
-func _process(_delta):
+func _process(delta):
+	._process(delta)
+	
 	var direction = _handle_input() * SPEED_MODIFIER
 	if (direction != Vector2.ZERO):
 		grid.request_move(position, direction)

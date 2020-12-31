@@ -5,6 +5,10 @@ extends Node2D
 var blocks = {}
 
 
+func _ready():
+	print(blocks)
+
+
 func find_block_at_position(pos):
 	for block in blocks.keys():
 		if blocks[block] == pos:
@@ -28,9 +32,7 @@ func find_blocks_at_direction(pos, direction):
 
 func request_move(pos, direction):
 	var blocksAtDirection = find_blocks_at_direction(pos, direction)
-
-	if blocksAtDirection == []:
-		return
-
+	print(blocksAtDirection)
+	
 	for block in blocksAtDirection:
 		blocks[block] += direction
