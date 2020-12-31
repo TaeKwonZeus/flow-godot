@@ -2,14 +2,8 @@ class_name Player
 extends Block
 
 
-export(int) var movementRate = 2\
-
-
 func _process(delta):
-	var isActive = tween.is_active()
-	print(isActive)
-	
-	if !isActive:
+	if !tween.is_active():
 		_handle_movement()
 
 
