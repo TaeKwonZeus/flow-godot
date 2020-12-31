@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "GameGrid",
 "language": "GDScript",
 "path": "res://Scripts/Grid/game_grid.gd"
+}, {
+"base": "Block",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Scripts/Grid/Blocks/player.gd"
 } ]
 _global_script_class_icons={
 "Block": "",
-"GameGrid": ""
+"GameGrid": "",
+"Player": ""
 }
 
 [application]

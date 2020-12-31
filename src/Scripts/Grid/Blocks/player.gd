@@ -1,9 +1,9 @@
+class_name Player
 extends Block
 
 
-func _process(delta):
-	var input = _handle_input()
-	position += input * SPEED_MODIFIER
+func _process(_delta):
+	var direction = _handle_input() * SPEED_MODIFIER
 
 
 func _handle_input():

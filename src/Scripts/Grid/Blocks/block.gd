@@ -8,4 +8,4 @@ onready var grid = get_parent()
 
 func _ready():
 	print("Ready!")
-	grid.blocks.push_back(self)
+	grid.blocks[self] = position
