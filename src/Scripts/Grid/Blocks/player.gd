@@ -4,6 +4,10 @@ extends Block
 
 func _process(_delta):
 	var direction = _handle_input() * SPEED_MODIFIER
+	if (direction != Vector2.ZERO):
+		grid.request_move(position, direction)
+
+	position = grid.blocks[self]
 
 
 func _handle_input():

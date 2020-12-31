@@ -29,7 +29,7 @@ func find_blocks_at_direction(pos, direction):
 func request_move(pos, direction):
 	var blocksAtDirection = find_blocks_at_direction(pos, direction)
 
-	if blocksAtDirection == null:
+	if blocksAtDirection == []:
 		return
 
 	for block in blocksAtDirection:
