@@ -11,7 +11,4 @@ func _ready():
 
 
 func _process(_delta):
-	var statedPos = grid.blocks[self]
-
-	if statedPos != position:
-		position = statedPos
+	position = grid.blocks[self]
