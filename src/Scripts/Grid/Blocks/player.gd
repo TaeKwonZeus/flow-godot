@@ -2,8 +2,15 @@ class_name Player
 extends Block
 
 
-export(int) var movementRate = 2
-onready var _timer = get_node("Timer")
+export(int) var movementRate = 2\
+
+
+func _process(delta):
+	var isActive = tween.is_active()
+	print(isActive)
+	
+	if !isActive:
+		_handle_movement()
 
 
 func _handle_input():
@@ -20,8 +27,3 @@ func _handle_movement():
 
 	if direction != Vector2.ZERO:
 		grid.request_move(position, direction)
-
-
-func _on_movement():
-	_handle_movement()
-	_timer.start()
