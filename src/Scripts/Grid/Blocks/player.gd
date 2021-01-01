@@ -8,11 +8,17 @@ func _process(delta):
 
 
 func _handle_input():
-	var vertical = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))
+	var vertical = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
+	
 	var horizontal
-	horizontal = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left")) if vertical == 0 else 0
+	
+	if vertical == 0:
+		horizontal = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+	else:
+		horizontal = 0
 	
 	return Vector2(horizontal, vertical)
+
 
 func _handle_movement():
 	var direction = _handle_input() * SPEED_MODIFIER
