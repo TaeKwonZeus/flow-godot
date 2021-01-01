@@ -3,7 +3,7 @@ extends Node2D
 
 
 const SPEED_MODIFIER = 32
-export(float) var speed = 0.05
+export(float) var speed = 20
 onready var grid = get_parent()
 onready var tween = get_node("Tween")
 
@@ -25,6 +25,6 @@ func _process(_delta):
 
 func animate(requested_position):
 	tween.interpolate_property(self, "position",
-			position, requested_position, speed,
+			position, requested_position, 1 / speed,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
