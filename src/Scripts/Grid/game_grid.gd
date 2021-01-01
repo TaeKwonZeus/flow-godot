@@ -22,12 +22,18 @@ func find_blocks_at_direction(pos, direction):
 		output.append(current)
 		ray += direction
 		current = find_block_at_position(ray)
+		
+		if current != null and !current is MoveableBlock:
+			return null
 
 	return output
 
 
 func request_move(pos, direction):
 	var blocks_at_direction = find_blocks_at_direction(pos, direction)
+	
+	if blocks_at_direction == null:
+		return
 	
 	for block in blocks_at_direction:
 		blocks[block] += direction
