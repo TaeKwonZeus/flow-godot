@@ -1,5 +1,5 @@
 class_name Player
-extends Block
+extends MoveableBlock
 
 
 func _process(delta):

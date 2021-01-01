@@ -20,6 +20,11 @@ _global_script_classes=[ {
 "path": "res://Scripts/Grid/game_grid.gd"
 }, {
 "base": "Block",
+"class": "MoveableBlock",
+"language": "GDScript",
+"path": "res://Scripts/Grid/Blocks/moveable_block.gd"
+}, {
+"base": "MoveableBlock",
 "class": "Player",
 "language": "GDScript",
 "path": "res://Scripts/Grid/Blocks/player.gd"
@@ -27,6 +32,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Block": "",
 "GameGrid": "",
+"MoveableBlock": "",
 "Player": ""
 }
 
