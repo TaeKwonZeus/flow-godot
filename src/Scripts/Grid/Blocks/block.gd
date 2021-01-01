@@ -3,7 +3,7 @@ extends Node2D
 
 
 const SPEED_MODIFIER = 32
-export(float) var speed = 0.06
+export(float) var speed = 0.05
 onready var grid = get_parent()
 onready var tween = get_node("Tween")
 
