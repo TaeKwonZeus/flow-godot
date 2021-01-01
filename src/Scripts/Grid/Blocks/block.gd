@@ -25,6 +25,6 @@ func _process(_delta):
 
 func animate(requestedPosition):
 	tween.interpolate_property(self, "position",
-		position, requestedPosition, speed,
-		Tween.TRANS_LINEAR, Tween.EASE_IN)
+			position, requestedPosition, speed,
+			Tween.TRANS_LINEAR, Tween.EASE_IN)
 	tween.start()
