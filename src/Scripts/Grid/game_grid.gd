@@ -27,7 +27,7 @@ func find_blocks_at_direction(pos, direction):
 
 
 func request_move(pos, direction):
-	var blocksAtDirection = find_blocks_at_direction(pos, direction)
+	var blocks_at_direction = find_blocks_at_direction(pos, direction)
 	
-	for block in blocksAtDirection:
+	for block in blocks_at_direction:
 		blocks[block] += direction
