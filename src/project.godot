@@ -36,6 +36,10 @@ config/name="Flow"
 run/main_scene="res://Scenes/Main.tscn"
 config/icon="res://Sprites/icon.png"
 
+[autoload]
+
+InputManager="*res://Scripts/input_manager.gd"
+
 [input]
 
 move_up={
