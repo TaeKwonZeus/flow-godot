@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/Grid/game_grid.gd" type="Script" id=1]
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Prefabs/Pipes/3-Cross.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Prefabs/Pipes/4-Cross.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Prefabs/Reservoir.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Prefabs/Jar.tscn" type="PackedScene" id=8]
 
 [node name="Main" type="Node2D"]
 
@@ -29,6 +30,9 @@ position = Vector2( -32, 32 )
 
 [node name="Reservoir" parent="GameGrid" instance=ExtResource( 7 )]
 position = Vector2( 32, -32 )
+
+[node name="Jar" parent="GameGrid" instance=ExtResource( 8 )]
+position = Vector2( 32, 64 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( -64, 0 )
