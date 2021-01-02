@@ -11,7 +11,7 @@ func _process(_delta):
 	var target_position = grid.blocks[self]
 	var threshold = 1
 	
-	if (target_position - position).length_squared() > pow(threshold, 2):
+	if (target_position - global_position).length_squared() > pow(threshold, 2):
 		animate(target_position)
 	else:
 		position = target_position
@@ -20,7 +20,7 @@ func _process(_delta):
 
 func animate(requested_position):
 	tween.interpolate_property(self, "position",
-			position, requested_position, 1 / speed,
+			global_position, requested_position, 1 / speed,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
 
