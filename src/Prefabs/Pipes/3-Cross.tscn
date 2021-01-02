@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Grid/Blocks/moveable_block.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Pipes/3-Cross/3-CrossEmpty.png" type="Texture" id=2]
+
+[node name="3-Cross" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="Tween" type="Tween" parent="."]
