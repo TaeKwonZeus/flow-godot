@@ -1,6 +1,8 @@
 extends Node
 
 
+signal reservoir_opened
+
 enum AxisTypes {
 	HORIZONTAL,
 	VERTICAL,
@@ -11,6 +13,9 @@ var _cur_axis = AxisTypes.NONE
 
 func _process(delta):
 	_movement_axis()
+	
+	if Input.is_action_just_pressed("reservoir_open"):
+		emit_signal("reservoir_opened")
 
 
 func _movement_axis():
