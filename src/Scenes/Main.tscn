@@ -24,10 +24,10 @@ position = Vector2( 16, 16 )
 [node name="Corner" parent="GameGrid" instance=ExtResource( 4 )]
 position = Vector2( 16, -16 )
 
-[node name="3-Cross" parent="GameGrid" instance=ExtResource( 5 )]
+[node name="T" parent="GameGrid" instance=ExtResource( 5 )]
 position = Vector2( -16, -16 )
 
-[node name="4-Cross" parent="GameGrid" instance=ExtResource( 6 )]
+[node name="X" parent="GameGrid" instance=ExtResource( 6 )]
 position = Vector2( -16, 16 )
 
 [node name="Reservoir" parent="GameGrid" instance=ExtResource( 7 )]

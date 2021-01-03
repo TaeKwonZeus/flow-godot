@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/4-CrossEmpty.png-f425543dc17ea97ffbade76218e384f3.stex"
+path="res://.import/XEmpty.png-b3a8f0061067ba1b544f0349f3120dcb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Pipes/4-Cross/4-CrossEmpty.png"
-dest_files=[ "res://.import/4-CrossEmpty.png-f425543dc17ea97ffbade76218e384f3.stex" ]
+source_file="res://Sprites/Pipes/X/XEmpty.png"
+dest_files=[ "res://.import/XEmpty.png-b3a8f0061067ba1b544f0349f3120dcb.stex" ]
 
 [params]
 
