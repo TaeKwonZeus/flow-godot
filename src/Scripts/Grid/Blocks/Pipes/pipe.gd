@@ -32,9 +32,9 @@ func activate(pos):
 			grid.leaks += 1
 
 
-func _get_outputs(input):
+func _get_outputs(_input):
 	pass
 
 
-func _is_rotated_properly(input):
+func _is_rotated_properly(_input):
 	pass

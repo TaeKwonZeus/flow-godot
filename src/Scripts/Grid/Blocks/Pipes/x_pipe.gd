@@ -10,5 +10,5 @@ func _get_outputs(input):
 	]
 
 
-func _is_rotated_properly(input):
+func _is_rotated_properly(_input):
 	return true

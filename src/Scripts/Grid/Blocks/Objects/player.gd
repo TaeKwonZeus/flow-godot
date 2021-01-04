@@ -2,7 +2,7 @@ class_name Player
 extends MoveableBlock
 
 
-func _process(delta):
+func _process(_delta):
 	if !tween.is_active():
 		_handle_movement()
 

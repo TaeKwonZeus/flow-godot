@@ -6,7 +6,7 @@ signal reservoir_opened
 var _movement_buffer = []
 
 
-func _process(delta):
+func _process(_delta):
 	_handle_movement_buffer()
 	
 	if Input.is_action_just_pressed("reservoir_open"):
