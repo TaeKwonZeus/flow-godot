@@ -29,3 +29,7 @@ func activate(pos):
 
 func _get_outputs(input):
 	pass
+
+
+func _is_rotated_properly(input):
+	pass
