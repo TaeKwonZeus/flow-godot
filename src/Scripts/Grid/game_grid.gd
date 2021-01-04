@@ -2,7 +2,7 @@ class_name GameGrid
 extends Node2D
 
 
-var leaks
+var leaks = 0
 var blocks = {}
 
 
