@@ -3,46 +3,37 @@ extends Node
 
 signal reservoir_opened
 
-enum AxisTypes {
-	HORIZONTAL,
-	VERTICAL,
-	NONE,
-}
-var _cur_axis = AxisTypes.NONE
+var _movement_buffer = []
 
 
 func _process(delta):
-	_movement_axis()
+	_handle_movement_buffer()
 	
 	if Input.is_action_just_pressed("reservoir_open"):
 		emit_signal("reservoir_opened")
 
 
-func _movement_axis():
-	if (Input.is_action_just_pressed("move_right") or Input.is_action_just_pressed("move_left")) and _cur_axis != AxisTypes.VERTICAL:
-		_cur_axis = AxisTypes.HORIZONTAL
-		
-	if (Input.is_action_just_pressed("move_up") or Input.is_action_just_pressed("move_down")) and _cur_axis != AxisTypes.HORIZONTAL:
-		_cur_axis = AxisTypes.VERTICAL
-		
-	if Input.is_action_just_released("move_right") or Input.is_action_just_released("move_left"):
-		if Input.is_action_pressed("move_up") or Input.is_action_pressed("move_down"):
-			_cur_axis = AxisTypes.VERTICAL
-		else:
-			_cur_axis = AxisTypes.NONE
-			
-	if Input.is_action_just_released("move_up") or Input.is_action_just_released("move_down"):
-		if Input.is_action_pressed("move_right") or Input.is_action_pressed("move_left"):
-			_cur_axis = AxisTypes.HORIZONTAL
-		else:
-			_cur_axis = AxisTypes.NONE
+func _handle_movement_buffer():
+	if Input.is_action_just_pressed("move_right"):
+		_movement_buffer.append(Vector2.RIGHT)
+	if Input.is_action_just_pressed("move_left"):
+		_movement_buffer.append(Vector2.LEFT)
+	if Input.is_action_just_pressed("move_up"):
+		_movement_buffer.append(Vector2.UP)
+	if Input.is_action_just_pressed("move_down"):
+		_movement_buffer.append(Vector2.DOWN)
+	if Input.is_action_just_released("move_right"):
+		_movement_buffer.erase(Vector2.RIGHT)
+	if Input.is_action_just_released("move_left"):
+		_movement_buffer.erase(Vector2.LEFT)
+	if Input.is_action_just_released("move_up"):
+		_movement_buffer.erase(Vector2.UP)
+	if Input.is_action_just_released("move_down"):
+		_movement_buffer.erase(Vector2.DOWN)
 
 
 func movement_input():
-	match _cur_axis:
-		AxisTypes.HORIZONTAL:
-			return Vector2(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), 0)
-		AxisTypes.VERTICAL:
-			return Vector2(0, Input.get_action_strength("move_down") - Input.get_action_strength("move_up"))
-		AxisTypes.NONE:
-			return Vector2.ZERO
+	if _movement_buffer.empty():
+		return Vector2.ZERO
+	
+	return _movement_buffer[0]

@@ -8,7 +8,7 @@ func _process(delta):
 
 
 func _handle_movement():
-	var direction = InputManager.movement_input() * SPEED_MODIFIER
+	var direction = InputManager.movement_input() * WORLD_MODIFIER
 
 	if direction != Vector2.ZERO:
 		grid.request_move(global_position, direction)

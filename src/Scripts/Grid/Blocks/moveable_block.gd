@@ -2,7 +2,6 @@ class_name MoveableBlock
 extends Block
 
 
-const SPEED_MODIFIER = 32
 export(float) var speed = 20
 onready var tween = get_node("Tween")
 
