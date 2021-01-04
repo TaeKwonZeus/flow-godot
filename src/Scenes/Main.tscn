@@ -19,7 +19,7 @@ script = ExtResource( 1 )
 position = Vector2( -80, 16 )
 
 [node name="Straight" parent="GameGrid" instance=ExtResource( 3 )]
-position = Vector2( 16, 16 )
+position = Vector2( 80, 16 )
 
 [node name="Corner" parent="GameGrid" instance=ExtResource( 4 )]
 position = Vector2( 16, -16 )
@@ -34,10 +34,10 @@ position = Vector2( -16, 16 )
 position = Vector2( 80, -16 )
 
 [node name="Jar" parent="GameGrid" instance=ExtResource( 8 )]
-position = Vector2( 48, 48 )
+position = Vector2( 80, 48 )
 
 [node name="Brick" parent="GameGrid" instance=ExtResource( 9 )]
-position = Vector2( 48, 16 )
+position = Vector2( 48, -64 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 16, 0 )
