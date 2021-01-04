@@ -13,6 +13,11 @@ func activate(pos):
 	print("Activated from position:", pos)
 	
 	var relative_input = pos - position
+	
+	if (!_is_rotated_properly(relative_input)):
+		print("Invalid rotation!")
+		return
+	
 	outputs = _get_outputs(relative_input)
 	
 	for output in outputs:
