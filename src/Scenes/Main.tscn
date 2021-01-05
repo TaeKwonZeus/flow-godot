@@ -26,7 +26,7 @@ rotation = 1.5708
 position = Vector2( 112, -16 )
 
 [node name="Corner2" parent="GameGrid" instance=ExtResource( 4 )]
-position = Vector2( 112, -16 )
+position = Vector2( 144, -16 )
 
 [node name="T" parent="GameGrid" instance=ExtResource( 5 )]
 position = Vector2( -16, -16 )

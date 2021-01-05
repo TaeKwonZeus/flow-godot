@@ -9,7 +9,7 @@ var blocks = {}
 
 func find_block_at_position(pos):
 	for block in blocks.keys():
-		if blocks[block] == pos:
+		if blocks[block][0] == pos:
 			return block
 	
 	return null
@@ -38,7 +38,8 @@ func request_move(pos, direction):
 		return
 	
 	for block in blocks_at_direction:
-		blocks[block] += direction
+		var local_pos = blocks[block][0]
+		blocks[block].push_front(local_pos + direction)
 
 
 func export_to_json():

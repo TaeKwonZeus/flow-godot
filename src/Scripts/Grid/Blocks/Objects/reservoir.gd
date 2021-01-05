@@ -7,8 +7,8 @@ func _ready():
 
 
 func activate():
-	var pos_below = grid.blocks[self] + Vector2.DOWN * WORLD_MODIFIER
+	var pos_below = grid.blocks[self][0] + Vector2.DOWN * WORLD_MODIFIER
 	var output = grid.find_block_at_position(pos_below)
 	
 	if output != null and output is Pipe:
-		output.activate(grid.blocks[self])
+		output.activate(grid.blocks[self][0])
