@@ -15,7 +15,7 @@ func _process(delta):
 
 func find_block_at_position(pos):
 	for block in blocks.keys():
-		if blocks[block][0] == pos:
+		if blocks[block][-1] == pos:
 			return block
 	
 	return null
@@ -44,11 +44,11 @@ func request_move(pos, direction):
 		return
 	
 	for block in blocks.keys():
-		var local_pos = blocks[block][0]
+		var local_pos = blocks[block][-1]
 		if block in blocks_at_direction:
-			blocks[block].push_front(local_pos + direction)
+			blocks[block].append(local_pos + direction)
 		else:
-			blocks[block].push_front(local_pos)
+			blocks[block].append(local_pos)
 
 
 func export_to_json():
@@ -63,4 +63,4 @@ func export_to_json():
 func _undo():
 	for block in blocks.keys():
 		if blocks[block].size() > 1:
-			blocks[block].pop_front()
+			blocks[block].pop_back()
