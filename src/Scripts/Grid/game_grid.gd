@@ -1,7 +1,8 @@
 class_name GameGrid
 extends Node2D
 
-
+export var path = "res://Levels/"
+export var level_name = "level_1"
 var leaks = 0
 var blocks = {}
 
@@ -38,3 +39,12 @@ func request_move(pos, direction):
 	
 	for block in blocks_at_direction:
 		blocks[block] += direction
+
+
+func export_to_json():
+	var file_path = path + level_name + ".json"
+	var file = File.new()
+	
+	file.open(file_path, File.WRITE)
+	file.store_line(to_json(blocks))
+	file.close()

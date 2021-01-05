@@ -19,7 +19,7 @@ script = ExtResource( 1 )
 position = Vector2( -80, 16 )
 
 [node name="Straight" parent="GameGrid" instance=ExtResource( 3 )]
-position = Vector2( 192, -64 )
+position = Vector2( 112, -112 )
 rotation = 1.5708
 
 [node name="Corner" parent="GameGrid" instance=ExtResource( 4 )]
@@ -46,3 +46,14 @@ position = Vector2( 48, 48 )
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 0.5, 0.5 )
+
+[node name="Button" type="Button" parent="."]
+margin_left = -256.0
+margin_top = 96.0
+margin_right = -128.0
+margin_bottom = 148.0
+text = "Export to JSON"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Button" to="GameGrid" method="export_to_json"]
