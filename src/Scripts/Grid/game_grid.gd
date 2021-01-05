@@ -5,6 +5,12 @@ export var path = "res://Levels/"
 export var level_name = "level_1"
 var leaks = 0
 var blocks = {}
+onready var player_tween = get_node("Player/Tween")
+
+
+func _process(delta):
+	if Input.is_action_pressed("undo") and !player_tween.is_active():
+		_undo()
 
 
 func find_block_at_position(pos):
@@ -37,9 +43,12 @@ func request_move(pos, direction):
 	if blocks_at_direction == null:
 		return
 	
-	for block in blocks_at_direction:
+	for block in blocks.keys():
 		var local_pos = blocks[block][0]
-		blocks[block].push_front(local_pos + direction)
+		if block in blocks_at_direction:
+			blocks[block].push_front(local_pos + direction)
+		else:
+			blocks[block].push_front(local_pos)
 
 
 func export_to_json():
@@ -49,3 +58,9 @@ func export_to_json():
 	file.open(file_path, File.WRITE)
 	file.store_line(to_json(blocks))
 	file.close()
+
+
+func _undo():
+	for block in blocks.keys():
+		if blocks[block].size() > 1:
+			blocks[block].pop_front()

@@ -3,7 +3,6 @@
 [ext_resource path="res://Sprites/Bird.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Grid/Blocks/Objects/player.gd" type="Script" id=2]
 
-
 [node name="Player" type="Node2D"]
 script = ExtResource( 2 )
 

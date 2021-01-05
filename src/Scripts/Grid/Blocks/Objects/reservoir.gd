@@ -3,7 +3,8 @@ extends Block
 
 
 func _ready():
-	InputManager.connect("reservoir_opened", self, "activate")
+	if Input.is_action_just_pressed("reservoir_open"):
+		activate()
 
 
 func activate():
