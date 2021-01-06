@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Sprites/Reservoir/Full.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Reservoir/ReservoirFull.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Grid/Blocks/Objects/reservoir.gd" type="Script" id=2]
 
 [node name="Reservoir" type="Node2D"]
