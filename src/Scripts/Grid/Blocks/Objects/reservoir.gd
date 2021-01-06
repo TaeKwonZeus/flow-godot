@@ -2,6 +2,10 @@ class_name Reservoir
 extends Block
 
 
+func _init():
+	type = "Reservoir"
+
+
 func _ready():
 	if Input.is_action_just_pressed("reservoir_open"):
 		activate()

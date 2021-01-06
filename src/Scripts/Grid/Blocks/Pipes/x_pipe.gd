@@ -2,6 +2,10 @@ class_name XPipe
 extends Pipe
 
 
+func _init():
+	type = "X"
+
+
 func _get_holes():
 	return [
 		Vector2.UP * WORLD_MODIFIER,

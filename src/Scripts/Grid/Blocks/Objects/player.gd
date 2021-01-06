@@ -5,6 +5,10 @@ extends MoveableBlock
 var _movement_buffer = []
 
 
+func _init():
+	type = "Player"
+
+
 func _process(_delta):
 	_movement_input_buffer()
 	

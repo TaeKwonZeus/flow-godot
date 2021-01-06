@@ -56,8 +56,28 @@ func export_to_json():
 	var file = File.new()
 	
 	file.open(file_path, File.WRITE)
-	file.store_line(to_json(blocks))
+	file.store_line(to_json(_get_json_list()))
 	file.close()
+
+
+func _get_json_list():
+	var list = []
+	
+	for block in blocks.keys():
+		list.append({
+			"type": block.type,
+			"position": _vec_to_list(blocks[block][-1]),
+			"rotation": round(block.rotation_degrees)
+		})
+	
+	return list
+
+
+func _vec_to_list(vec):
+	return [
+		vec.x,
+		vec.y,
+	]
 
 
 func _undo():
