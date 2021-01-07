@@ -8,7 +8,7 @@ var blocks = {}
 onready var player_tween = get_node("Player/Tween")
 
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_pressed("undo") and !player_tween.is_active():
 		_undo()
 
@@ -58,6 +58,11 @@ func export_to_json():
 	file.open(file_path, File.WRITE)
 	file.store_line(to_json(_get_json_list()))
 	file.close()
+
+
+func get_pos(obj):
+	if obj in blocks:
+		return blocks[obj][-1]
 
 
 func _get_json_list():
