@@ -10,7 +10,7 @@ func _init():
 
 
 func activate(pos):
-	var own_pos = grid.blocks[self][-1]
+	var own_pos = grid.get_pos(self)
 	print("Activated from position:", pos)
 	
 	var relative_input = pos - own_pos

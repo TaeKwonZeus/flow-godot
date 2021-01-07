@@ -4,7 +4,7 @@ extends Node2D
 export var path = "res://Levels/"
 export var level_name = "level_1"
 var leaks = 0
-var blocks = {}
+var _blocks = {}
 onready var player_tween = get_node("Player/Tween")
 
 
@@ -14,14 +14,14 @@ func _process(_delta):
 
 
 func find_block_at_position(pos):
-	for block in blocks.keys():
-		if blocks[block][-1] == pos:
+	for block in _blocks.keys():
+		if get_pos(block) == pos:
 			return block
 	
 	return null
 
 
-func find_blocks_at_direction(pos, direction):
+func find__blocks_at_direction(pos, direction):
 	var output = []
 	var ray = pos
 	var current = find_block_at_position(ray)
@@ -38,17 +38,17 @@ func find_blocks_at_direction(pos, direction):
 
 
 func request_move(pos, direction):
-	var blocks_at_direction = find_blocks_at_direction(pos, direction)
+	var _blocks_at_direction = find__blocks_at_direction(pos, direction)
 	
-	if blocks_at_direction == null:
+	if _blocks_at_direction == null:
 		return
 	
-	for block in blocks.keys():
-		var local_pos = blocks[block][-1]
-		if block in blocks_at_direction:
-			blocks[block].append(local_pos + direction)
+	for block in _blocks.keys():
+		var local_pos = _blocks[block][-1]
+		if block in _blocks_at_direction:
+			_blocks[block].append(local_pos + direction)
 		else:
-			blocks[block].append(local_pos)
+			_blocks[block].append(local_pos)
 
 
 func export_to_json():
@@ -61,17 +61,23 @@ func export_to_json():
 
 
 func get_pos(obj):
-	if obj in blocks:
-		return blocks[obj][-1]
+	if obj in _blocks:
+		return _blocks[obj][-1]
+
+
+func set_pos(obj, pos):
+	if !_blocks.keys().has(obj):
+		_blocks[obj] = []
+	_blocks[obj].append(pos)
 
 
 func _get_json_list():
 	var list = []
 	
-	for block in blocks.keys():
+	for block in _blocks.keys():
 		list.append({
 			"type": block.type,
-			"position": _vec_to_list(blocks[block][-1]),
+			"position": _vec_to_list(_blocks[block][-1]),
 			"rotation": round(block.rotation_degrees)
 		})
 	
@@ -86,6 +92,6 @@ func _vec_to_list(vec):
 
 
 func _undo():
-	for block in blocks.keys():
-		if blocks[block].size() > 1:
-			blocks[block].pop_back()
+	for block in _blocks.keys():
+		if _blocks[block].size() > 1:
+			_blocks[block].pop_back()

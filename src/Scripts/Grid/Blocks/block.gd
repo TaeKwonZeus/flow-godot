@@ -9,4 +9,4 @@ onready var grid = get_node("/root/Main/GameGrid")
 
 
 func _ready():
-	grid.blocks[self] = [global_position]
+	grid.set_pos(self, global_position)

@@ -7,7 +7,7 @@ onready var tween = get_node("Tween")
 
 
 func _process(_delta):
-	var target_position = grid.blocks[self][-1]
+	var target_position = grid.get_pos(self)
 	var threshold = 1
 	
 	if (target_position - global_position).length_squared() > pow(threshold, 2):
