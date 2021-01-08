@@ -57,11 +57,11 @@ func request_move(pos, direction):
 		return
 	
 	for block in _blocks.keys():
-		var local_pos = _blocks[block][-1]
+		var local_pos = get_pos(block)
 		if block in _blocks_at_direction:
-			_blocks[block].append(local_pos + direction)
+			set_pos(block, local_pos + direction)
 		else:
-			_blocks[block].append(local_pos)
+			set_pos(block, local_pos)
 
 
 func export_to_json():

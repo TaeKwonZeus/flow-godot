@@ -20,7 +20,7 @@ func _handle_movement():
 	var direction = _movement_input() * WORLD_MODIFIER
 	
 	if direction != Vector2.ZERO:
-		grid.request_move(global_position, direction)
+		grid.request_move(position, direction)
 
 
 func _movement_input_buffer():
