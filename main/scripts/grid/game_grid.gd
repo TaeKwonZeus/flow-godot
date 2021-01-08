@@ -1,7 +1,20 @@
 class_name GameGrid
 extends Node2D
 
-export var path = "res://Levels/"
+
+const TYPE_MATCH = {
+	"Player": preload("res://nodes/Player.tscn"),
+	"Reservoir": preload("res://nodes/Reservoir.tscn"),
+	"Jar": preload("res://nodes/Jar.tscn"),
+	"Brick": preload("res://nodes/Brick.tscn"),
+	"Wall": preload("res://nodes/Wall.tscn"),
+	"Straight": preload("res://nodes/pipes/Straight.tscn"),
+	"Corner": preload("res://nodes/pipes/Corner.tscn"),
+	"T": preload("res://nodes/pipes/T.tscn"),
+	"X": preload("res://nodes/pipes/X.tscn"),
+}
+
+export var path = "res://levels/"
 export var level_name = "level_1"
 var leaks = 0
 var _blocks = {}
@@ -54,10 +67,37 @@ func request_move(pos, direction):
 func export_to_json():
 	var file_path = path + level_name + ".json"
 	var file = File.new()
-	
 	file.open(file_path, File.WRITE)
 	file.store_line(to_json(_get_json_list()))
 	file.close()
+
+
+func _delete_children():
+	for child in get_children():
+		remove_child(child)
+		child.queue_free()
+
+
+func load_from_json():
+	_delete_children()
+	_blocks.clear()
+	
+	var file_path = path + level_name + ".json"
+	var file = File.new()
+	file.open(file_path, File.READ)
+	var content = parse_json(file.get_as_text())
+	
+	for data in content:
+		var pos = _list_to_vec(data["position"])
+		var rot = deg2rad(data["rotation"])
+		var type = data["type"]
+		
+		var obj_instance = TYPE_MATCH[type].instance()
+		add_child(obj_instance)
+		
+		obj_instance.position = pos
+		set_pos(obj_instance, pos)
+		obj_instance.rotation = rot
 
 
 func get_pos(obj):
@@ -85,10 +125,11 @@ func _get_json_list():
 
 
 func _vec_to_list(vec):
-	return [
-		vec.x,
-		vec.y,
-	]
+	return [vec.x, vec.y]
+
+
+func _list_to_vec(list):
+	return Vector2(list[0], list[1])
 
 
 func _undo():

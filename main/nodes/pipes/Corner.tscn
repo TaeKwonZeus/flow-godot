@@ -3,21 +3,6 @@
 [ext_resource path="res://scripts/grid/blocks/pipes/corner_pipe.gd" type="Script" id=1]
 [ext_resource path="res://sprites/pipes/corner/corner_empty.png" type="Texture" id=2]
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 [node name="Corner" type="Node2D"]
 script = ExtResource( 1 )
 
