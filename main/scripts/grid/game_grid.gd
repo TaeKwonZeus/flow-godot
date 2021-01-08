@@ -21,7 +21,7 @@ func find_block_at_position(pos):
 	return null
 
 
-func find__blocks_at_direction(pos, direction):
+func find_blocks_at_direction(pos, direction):
 	var output = []
 	var ray = pos
 	var current = find_block_at_position(ray)
@@ -38,7 +38,7 @@ func find__blocks_at_direction(pos, direction):
 
 
 func request_move(pos, direction):
-	var _blocks_at_direction = find__blocks_at_direction(pos, direction)
+	var _blocks_at_direction = find_blocks_at_direction(pos, direction)
 	
 	if _blocks_at_direction == null:
 		return
