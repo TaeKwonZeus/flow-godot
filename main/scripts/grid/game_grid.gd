@@ -38,7 +38,7 @@ func find_blocks_at_direction(pos, direction):
 	var output = []
 	var ray = pos
 	var current = find_block_at_position(ray)
-
+	
 	while current != null:
 		output.append(current)
 		ray += direction
@@ -46,7 +46,7 @@ func find_blocks_at_direction(pos, direction):
 		
 		if current != null and !current is MoveableBlock:
 			return null
-
+	
 	return output
 
 

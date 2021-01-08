@@ -22,4 +22,3 @@ func animate(requested_position):
 			global_position, requested_position, 1 / speed,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
-

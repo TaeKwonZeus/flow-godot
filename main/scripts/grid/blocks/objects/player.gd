@@ -18,7 +18,7 @@ func _process(_delta):
 
 func _handle_movement():
 	var direction = _movement_input() * WORLD_MODIFIER
-
+	
 	if direction != Vector2.ZERO:
 		grid.request_move(global_position, direction)
 
