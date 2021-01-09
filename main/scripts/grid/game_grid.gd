@@ -27,7 +27,7 @@ func _process(_delta):
 
 
 func find_block_at_position(pos):
-	for block in _blocks.keys():
+	for block in _blocks:
 		if get_pos(block) == pos:
 			return block
 	
@@ -56,7 +56,7 @@ func request_move(pos, direction):
 	if _blocks_at_direction == null:
 		return
 	
-	for block in _blocks.keys():
+	for block in _blocks:
 		var local_pos = get_pos(block)
 		if block in _blocks_at_direction:
 			set_pos(block, local_pos + direction)
@@ -79,12 +79,24 @@ func _delete_children():
 
 
 func load_from_json():
+	var dialog = FileDialog.new()
+	add_child(dialog)
+	dialog.rect_min_size = Vector2(500, 500)
+	dialog.access = FileDialog.ACCESS_FILESYSTEM
+	dialog.mode = FileDialog.MODE_OPEN_FILE
+	dialog.add_filter("*.json; JSON File")
+	
+	dialog.connect("file_selected", self, "on_load_from_json")
+	dialog.connect("popup_hide", dialog, "queue_free")
+	dialog.popup()
+
+
+func on_load_from_json(filename):
 	_delete_children()
 	_blocks.clear()
 	
-	var file_path = path + level_name + ".json"
 	var file = File.new()
-	file.open(file_path, File.READ)
+	file.open(filename, File.READ)
 	var content = parse_json(file.get_as_text())
 	
 	for data in content:
@@ -106,7 +118,7 @@ func get_pos(obj):
 
 
 func set_pos(obj, pos):
-	if !_blocks.keys().has(obj):
+	if !obj in _blocks:
 		_blocks[obj] = []
 	_blocks[obj].append(pos)
 
@@ -114,7 +126,7 @@ func set_pos(obj, pos):
 func _get_json_list():
 	var list = []
 	
-	for block in _blocks.keys():
+	for block in _blocks:
 		list.append({
 			"type": block.type,
 			"position": _vec_to_list(_blocks[block][-1]),
