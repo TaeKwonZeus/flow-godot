@@ -25,9 +25,9 @@ func activate(pos):
 		var global = own_pos + output
 		var block = grid.find_block_at_position(global)
 		
-		if block != null and block.is_pipe:
+		if not block == null and block.is_pipe:
 			block.activate(own_pos)
-		elif block != null and block is Jar:
+		elif not block == null and block is Jar:
 			print("Yay")
 		elif block == null:
 			print("Lol don't leak")

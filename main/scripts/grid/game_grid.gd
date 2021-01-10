@@ -2,16 +2,18 @@ class_name GameGrid
 extends Node2D
 
 
+signal load_requested(path)
+
 const TYPE_MATCH = {
-	"Player": preload("res://nodes/Player.tscn"),
-	"Reservoir": preload("res://nodes/Reservoir.tscn"),
-	"Jar": preload("res://nodes/Jar.tscn"),
-	"Brick": preload("res://nodes/Brick.tscn"),
-	"Wall": preload("res://nodes/Wall.tscn"),
-	"Straight": preload("res://nodes/pipes/Straight.tscn"),
-	"Corner": preload("res://nodes/pipes/Corner.tscn"),
-	"T": preload("res://nodes/pipes/T.tscn"),
-	"X": preload("res://nodes/pipes/X.tscn"),
+	"Player": preload("res://nodes/blocks/objects/Player.tscn"),
+	"Reservoir": preload("res://nodes/blocks/objects/Reservoir.tscn"),
+	"Jar": preload("res://nodes/blocks/objects/Jar.tscn"),
+	"Brick": preload("res://nodes/blocks/objects/Brick.tscn"),
+	"Wall": preload("res://nodes/blocks/objects/Wall.tscn"),
+	"Straight": preload("res://nodes/blocks/pipes/Straight.tscn"),
+	"Corner": preload("res://nodes/blocks/pipes/Corner.tscn"),
+	"T": preload("res://nodes/blocks/pipes/T.tscn"),
+	"X": preload("res://nodes/blocks/pipes/X.tscn"),
 }
 
 export var path = "res://levels/"
@@ -19,6 +21,7 @@ export var level_name = "level_1"
 var leaks = 0
 var _blocks = {}
 onready var player_tween = get_node("Player/Tween")
+onready var ui = get_parent().get_node("UI")
 
 
 func _process(_delta):
@@ -39,12 +42,12 @@ func find_blocks_at_direction(pos, direction):
 	var ray = pos
 	var current = find_block_at_position(ray)
 	
-	while current != null:
+	while not current == null:
 		output.append(current)
 		ray += direction
 		current = find_block_at_position(ray)
 		
-		if current != null and !current is MoveableBlock:
+		if not current == null and not current is MoveableBlock:
 			return null
 	
 	return output
@@ -79,16 +82,7 @@ func _delete_children():
 
 
 func load_from_json():
-	var dialog = FileDialog.new()
-	add_child(dialog)
-	dialog.rect_min_size = Vector2(500, 500)
-	dialog.access = FileDialog.ACCESS_FILESYSTEM
-	dialog.mode = FileDialog.MODE_OPEN_FILE
-	dialog.add_filter("*.json; JSON File")
-	
-	dialog.connect("file_selected", self, "on_load_from_json")
-	dialog.connect("popup_hide", dialog, "queue_free")
-	dialog.popup()
+	emit_signal("load_requested", path)
 
 
 func on_load_from_json(filename):
@@ -118,7 +112,7 @@ func get_pos(obj):
 
 
 func set_pos(obj, pos):
-	if !obj in _blocks:
+	if not obj in _blocks:
 		_blocks[obj] = []
 	_blocks[obj].append(pos)
 
