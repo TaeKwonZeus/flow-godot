@@ -3,7 +3,6 @@ extends Block
 
 
 export(float) var speed = 20
-onready var tween = get_node("Tween")
 
 
 func _process(_delta):
@@ -14,11 +13,11 @@ func _process(_delta):
 		animate(target_position)
 	else:
 		position = target_position
-		tween.stop(Tween)
+		$Tween.stop(Tween)
 
 
 func animate(requested_position):
-	tween.interpolate_property(self, "position",
+	$Tween.interpolate_property(self, "position",
 			position, requested_position, 1 / speed,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	tween.start()
+	$Tween.start()

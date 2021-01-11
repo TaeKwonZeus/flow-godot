@@ -12,8 +12,11 @@ func _init():
 func _process(_delta):
 	_movement_input_buffer()
 	
-	if !tween.is_active():
+	if !$Tween.is_active():
 		_handle_movement()
+	
+	if Input.is_action_pressed("undo") and not $Tween.is_active():
+		grid.undo()
 
 
 func _handle_movement():

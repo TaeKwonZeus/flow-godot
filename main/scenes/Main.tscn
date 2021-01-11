@@ -53,3 +53,5 @@ __meta__ = {
 [connection signal="load_requested" from="GameGrid" to="UI/LoadList" method="load_items"]
 [connection signal="pressed" from="UI/Save" to="GameGrid" method="export_to_json"]
 [connection signal="pressed" from="UI/Load" to="GameGrid" method="load_from_json"]
+[connection signal="item_selected" from="UI/LoadList" to="UI/LoadList" method="on_load"]
+[connection signal="on_load" from="UI/LoadList" to="GameGrid" method="on_load_from_json"]

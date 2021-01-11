@@ -20,13 +20,7 @@ export var path = "res://levels/"
 export var level_name = "level_1"
 var leaks = 0
 var _blocks = {}
-onready var player_tween = get_node("Player/Tween")
 onready var ui = get_parent().get_node("UI")
-
-
-func _process(_delta):
-	if Input.is_action_pressed("undo") and !player_tween.is_active():
-		_undo()
 
 
 func find_block_at_position(pos):
@@ -86,11 +80,12 @@ func load_from_json():
 
 
 func on_load_from_json(filename):
+	var actual_path = path + filename + ".json"
 	_delete_children()
 	_blocks.clear()
 	
 	var file = File.new()
-	file.open(filename, File.READ)
+	file.open(actual_path, File.READ)
 	var content = parse_json(file.get_as_text())
 	
 	for data in content:
@@ -104,6 +99,8 @@ func on_load_from_json(filename):
 		obj_instance.position = pos
 		set_pos(obj_instance, pos)
 		obj_instance.rotation = rot
+		
+		_blocks[obj_instance] = [pos]
 
 
 func get_pos(obj):
@@ -138,7 +135,7 @@ func _list_to_vec(list):
 	return Vector2(list[0], list[1])
 
 
-func _undo():
+func undo():
 	for block in _blocks.keys():
 		if _blocks[block].size() > 1:
 			_blocks[block].pop_back()
