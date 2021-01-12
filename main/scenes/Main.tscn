@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scripts/grid/game_grid.gd" type="Script" id=1]
-[ext_resource path="res://scripts/ui/load_list_loader.gd" type="Script" id=2]
+[ext_resource path="res://scripts/ui/loader.gd" type="Script" id=2]
+[ext_resource path="res://scripts/ui/saver.gd" type="Script" id=3]
 
 [node name="Main" type="Node2D"]
 
@@ -40,18 +41,86 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LoadList" type="ItemList" parent="UI"]
+[node name="Loader" type="Control" parent="UI"]
 visible = false
-margin_left = -224.0
-margin_top = -128.0
-margin_right = 224.0
-margin_bottom = 128.0
+margin_right = 40.0
+margin_bottom = 40.0
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="load_requested" from="GameGrid" to="UI/LoadList" method="load_items"]
-[connection signal="pressed" from="UI/Save" to="GameGrid" method="export_to_json"]
-[connection signal="pressed" from="UI/Load" to="GameGrid" method="load_from_json"]
-[connection signal="item_selected" from="UI/LoadList" to="UI/LoadList" method="on_load"]
-[connection signal="on_load" from="UI/LoadList" to="GameGrid" method="on_load_from_json"]
+
+[node name="ItemList" type="ItemList" parent="UI/Loader"]
+margin_left = -224.0
+margin_top = -96.0
+margin_right = 224.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="UI/Loader"]
+margin_left = -224.0
+margin_top = -128.0
+margin_right = 224.0
+margin_bottom = -96.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/Loader/Panel"]
+margin_right = 448.0
+margin_bottom = 32.0
+text = "Select a level to load:"
+align = 1
+valign = 1
+
+[node name="Saver" type="Control" parent="UI"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="UI/Saver"]
+margin_left = -224.0
+margin_top = -32.0
+margin_right = 224.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/Saver/Panel"]
+margin_right = 448.0
+margin_bottom = 32.0
+text = "Name the level:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineEdit" type="LineEdit" parent="UI/Saver"]
+margin_left = -224.0
+margin_right = 160.0
+margin_bottom = 32.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SaveButton" type="Button" parent="UI/Saver"]
+margin_left = 160.0
+margin_right = 224.0
+margin_bottom = 32.0
+text = "Save"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="UI/Save" to="UI/Saver" method="_on_save_requested"]
+[connection signal="pressed" from="UI/Load" to="UI/Loader" method="_load_items"]
+[connection signal="loaded" from="UI/Loader" to="GameGrid" method="_on_load_from_json"]
+[connection signal="item_selected" from="UI/Loader/ItemList" to="UI/Loader" method="_on_load"]
+[connection signal="saved" from="UI/Saver" to="GameGrid" method="_export_to_json"]
+[connection signal="pressed" from="UI/Saver/SaveButton" to="UI/Saver" method="_on_saved"]

@@ -2,8 +2,6 @@ class_name GameGrid
 extends Node2D
 
 
-signal load_requested(path)
-
 const TYPE_MATCH = {
 	"Player": preload("res://nodes/blocks/objects/Player.tscn"),
 	"Reservoir": preload("res://nodes/blocks/objects/Reservoir.tscn"),
@@ -17,7 +15,6 @@ const TYPE_MATCH = {
 }
 
 export var path = "res://levels/"
-export var level_name = "level_1"
 var leaks = 0
 var _blocks = {}
 onready var ui = get_parent().get_node("UI")
@@ -61,7 +58,7 @@ func request_move(pos, direction):
 			set_pos(block, local_pos)
 
 
-func export_to_json():
+func _export_to_json(level_name):
 	var file_path = path + level_name + ".json"
 	var file = File.new()
 	file.open(file_path, File.WRITE)
@@ -75,17 +72,12 @@ func _delete_children():
 		child.queue_free()
 
 
-func load_from_json():
-	emit_signal("load_requested", path)
-
-
-func on_load_from_json(filename):
-	var actual_path = path + filename + ".json"
+func _on_load_from_json(file_path):
 	_delete_children()
 	_blocks.clear()
 	
 	var file = File.new()
-	file.open(actual_path, File.READ)
+	file.open(file_path, File.READ)
 	var content = parse_json(file.get_as_text())
 	
 	for data in content:
