@@ -29,9 +29,10 @@ func activate(pos):
 			block.activate(own_pos)
 		elif not block == null and block is Jar:
 			print("Yay")
-		elif block == null:
+		elif block == null or block is Player:
 			print("Lol don't leak")
 			grid.leaks += 1
+			grid.emit_signal("leaks_displayed", grid.leaks)
 
 
 func _get_outputs(input):

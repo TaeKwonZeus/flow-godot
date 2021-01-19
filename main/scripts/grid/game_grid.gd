@@ -2,6 +2,8 @@ class_name GameGrid
 extends Node2D
 
 
+signal leaks_displayed(number)
+
 const TYPE_MATCH = {
 	"Player": preload("res://nodes/blocks/objects/Player.tscn"),
 	"Reservoir": preload("res://nodes/blocks/objects/Reservoir.tscn"),

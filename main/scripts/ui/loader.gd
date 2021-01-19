@@ -33,5 +33,7 @@ func _on_load(index):
 	
 	for i in range($ItemList.get_item_count()):
 		$ItemList.remove_item(i)
-	
-	hide()
+
+
+func _on_Load_pressed():
+	pass # Replace with function body.

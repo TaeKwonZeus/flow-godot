@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/grid/game_grid.gd" type="Script" id=1]
 [ext_resource path="res://scripts/ui/loader.gd" type="Script" id=2]
 [ext_resource path="res://scripts/ui/saver.gd" type="Script" id=3]
+[ext_resource path="res://scripts/ui/load_button.gd" type="Script" id=4]
+[ext_resource path="res://scripts/ui/menu_ui.gd" type="Script" id=5]
+[ext_resource path="res://scripts/ui/leaks_display.gd" type="Script" id=6]
 
 [node name="Main" type="Node2D"]
 
@@ -22,26 +25,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Save" type="Button" parent="UI"]
-margin_left = -256.0
-margin_top = 96.0
-margin_right = -128.0
-margin_bottom = 150.0
-text = "Save level"
+[node name="MenuUI" type="Control" parent="UI"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Load" type="Button" parent="UI"]
-margin_left = -128.0
-margin_top = 96.0
-margin_bottom = 150.0
-text = "Load level"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Loader" type="Control" parent="UI"]
+[node name="Loader" type="Control" parent="UI/MenuUI"]
 visible = false
 margin_right = 40.0
 margin_bottom = 40.0
@@ -50,7 +42,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ItemList" type="ItemList" parent="UI/Loader"]
+[node name="ItemList" type="ItemList" parent="UI/MenuUI/Loader"]
 margin_left = -224.0
 margin_top = -96.0
 margin_right = 224.0
@@ -59,7 +51,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Panel" type="Panel" parent="UI/Loader"]
+[node name="Panel" type="Panel" parent="UI/MenuUI/Loader"]
 margin_left = -224.0
 margin_top = -128.0
 margin_right = 224.0
@@ -68,12 +60,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="UI/Loader/Panel"]
+[node name="Label" type="Label" parent="UI/MenuUI/Loader/Panel"]
 margin_right = 448.0
 margin_bottom = 32.0
 text = "Select a level to load:"
 align = 1
 valign = 1
+
+[node name="Load" type="Button" parent="UI/MenuUI"]
+margin_left = -96.0
+margin_top = -32.0
+margin_right = 96.0
+text = "Load level"
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Saver" type="Control" parent="UI"]
 visible = false
@@ -118,9 +120,39 @@ text = "Save"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="pressed" from="UI/Save" to="UI/Saver" method="_on_save_requested"]
-[connection signal="pressed" from="UI/Load" to="UI/Loader" method="_load_items"]
-[connection signal="loaded" from="UI/Loader" to="GameGrid" method="_on_load_from_json"]
-[connection signal="item_selected" from="UI/Loader/ItemList" to="UI/Loader" method="_on_load"]
+
+[node name="GameUI" type="Control" parent="UI"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Save" type="Button" parent="UI/GameUI"]
+margin_left = -256.0
+margin_top = 96.0
+margin_right = -128.0
+margin_bottom = 150.0
+text = "Save level"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/GameUI"]
+margin_left = -256.0
+margin_top = -150.0
+margin_right = -128.0
+margin_bottom = -128.0
+text = "Leaks: "
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="leaks_displayed" from="GameGrid" to="UI/GameUI/Label" method="_on_leaks_changed"]
+[connection signal="loaded" from="UI/MenuUI/Loader" to="UI/MenuUI" method="_on_loaded"]
+[connection signal="loaded" from="UI/MenuUI/Loader" to="GameGrid" method="_on_load_from_json"]
+[connection signal="item_selected" from="UI/MenuUI/Loader/ItemList" to="UI/MenuUI/Loader" method="_on_load"]
+[connection signal="pressed" from="UI/MenuUI/Load" to="UI/MenuUI/Loader" method="_load_items"]
 [connection signal="saved" from="UI/Saver" to="GameGrid" method="_export_to_json"]
 [connection signal="pressed" from="UI/Saver/SaveButton" to="UI/Saver" method="_on_saved"]
+[connection signal="pressed" from="UI/GameUI/Save" to="UI/Saver" method="_on_save_requested"]
