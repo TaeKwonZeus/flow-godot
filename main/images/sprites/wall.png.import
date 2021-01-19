@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/straight_empty.png-eeed2f17cf965c13d73f5d7e7e83cd6d.stex"
+path="res://.import/wall.png-92e334a66ead4e0ff06d0f018bf12283.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/pipes/straight/straight_empty.png"
-dest_files=[ "res://.import/straight_empty.png-eeed2f17cf965c13d73f5d7e7e83cd6d.stex" ]
+source_file="res://images/sprites/wall.png"
+dest_files=[ "res://.import/wall.png-92e334a66ead4e0ff06d0f018bf12283.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
