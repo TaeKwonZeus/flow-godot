@@ -1,12 +1,11 @@
 extends Control
 
 
-signal loaded(file_name)
 export var levels_folder = "res://levels/"
 export var extension = ".json"
 
 
-func _load_items():
+func load_items():
 	show()
 	
 	for i in range($ItemList.get_item_count()):
@@ -28,12 +27,6 @@ func _load_items():
 
 func _on_load(index):
 	var file_name = $ItemList.get_item_text(index)
-	var file_path = levels_folder + file_name + extension
-	emit_signal("loaded", file_path)
 	
-	for i in range($ItemList.get_item_count()):
-		$ItemList.remove_item(i)
-
-
-func _on_Load_pressed():
-	pass # Replace with function body.
+	GlobalLevelData.level_path = levels_folder + file_name + extension
+	GlobalLevelData.load_level(levels_folder + file_name + extension, LevelOpenMode.PLAY)

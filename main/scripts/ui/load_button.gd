@@ -1,5 +1,9 @@
 extends Button
 
 
-func _ready():
-	connect("pressed", self, "hide")
+onready var loader = $"../Loader"
+
+
+func _pressed():
+	loader.load_items()
+	hide()

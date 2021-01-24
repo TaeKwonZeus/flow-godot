@@ -19,7 +19,11 @@ const TYPE_MATCH = {
 export var path = "res://levels/"
 var leaks = 0
 var _blocks = {}
-onready var ui = get_parent().get_node("UI")
+
+
+func _ready():
+	load_from_json(GlobalLevelData.level_path)
+	emit_signal("leaks_displayed", leaks)
 
 
 func find_block_at_position(pos):
@@ -74,7 +78,7 @@ func _delete_children():
 		child.queue_free()
 
 
-func _on_load_from_json(file_path):
+func load_from_json(file_path):
 	_delete_children()
 	_blocks.clear()
 	

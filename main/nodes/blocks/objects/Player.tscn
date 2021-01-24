@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://images/sprites/bird.png" type="Texture" id=1]
+[ext_resource path="res://images/sprites/Player.png" type="Texture" id=1]
 [ext_resource path="res://scripts/grid/blocks/objects/player.gd" type="Script" id=2]
 
 [node name="Player" type="Node2D"]

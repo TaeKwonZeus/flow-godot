@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/grid/blocks/objects/jar.gd"
 }, {
+"base": "Reference",
+"class": "LevelOpenMode",
+"language": "GDScript",
+"path": "res://scripts/level_open_modes.gd"
+}, {
 "base": "Block",
 "class": "MoveableBlock",
 "language": "GDScript",
@@ -75,6 +80,7 @@ _global_script_class_icons={
 "CornerPipe": "",
 "GameGrid": "",
 "Jar": "",
+"LevelOpenMode": "",
 "MoveableBlock": "",
 "Pipe": "",
 "Player": "",
@@ -87,8 +93,12 @@ _global_script_class_icons={
 [application]
 
 config/name="Flow"
-run/main_scene="res://scenes/Main.tscn"
+run/main_scene="res://scenes/Menu.tscn"
 config/icon="res://images/sprites/icon.png"
+
+[autoload]
+
+GlobalLevelData="*res://scripts/global_level_data.gd"
 
 [display]
 
