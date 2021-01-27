@@ -18,6 +18,7 @@ const TYPE_MATCH = {
 
 export var path = "res://levels/"
 var leaks = 0
+var _blocks_list = BlocksList.new()
 var _blocks = {}
 
 
@@ -64,7 +65,7 @@ func request_move(pos, direction):
 			set_pos(block, local_pos)
 
 
-func _export_to_json(level_name):
+func export_to_json(level_name):
 	var file_path = path + level_name + ".json"
 	var file = File.new()
 	file.open(file_path, File.WRITE)
@@ -87,9 +88,10 @@ func load_from_json(file_path):
 	var content = parse_json(file.get_as_text())
 	
 	for data in content:
+		var type = _blocks_list.add_block(data)
+		
 		var pos = _list_to_vec(data["position"])
 		var rot = deg2rad(data["rotation"])
-		var type = data["type"]
 		
 		var obj_instance = TYPE_MATCH[type].instance()
 		add_child(obj_instance)

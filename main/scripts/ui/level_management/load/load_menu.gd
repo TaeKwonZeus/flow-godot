@@ -27,6 +27,4 @@ func load_items():
 
 func _on_load(index):
 	var file_name = $ItemList.get_item_text(index)
-	
-	GlobalLevelData.level_path = levels_folder + file_name + extension
 	GlobalLevelData.load_level(levels_folder + file_name + extension, LevelOpenMode.PLAY)

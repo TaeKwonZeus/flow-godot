@@ -1,52 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://scripts/ui/load_button.gd" type="Script" id=1]
-[ext_resource path="res://scripts/ui/loader.gd" type="Script" id=2]
+[ext_resource path="res://scripts/ui/level_management/load/load_button.gd" type="Script" id=1]
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Loader" type="Control" parent="."]
-visible = false
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_right = 40.0
-margin_bottom = 40.0
-script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ItemList" type="ItemList" parent="Loader"]
-margin_left = -224.0
-margin_top = -96.0
-margin_right = 224.0
-margin_bottom = 128.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Panel" type="Panel" parent="Loader"]
-margin_left = -224.0
-margin_top = -128.0
-margin_right = 224.0
-margin_bottom = -96.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Loader/Panel"]
-margin_right = 448.0
-margin_bottom = 32.0
-text = "Select a level to load:"
-align = 1
-valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -60,9 +18,8 @@ margin_left = -96.0
 margin_top = -12.0
 margin_right = 96.0
 margin_bottom = 20.0
-text = "Load level"
+text = "Play level"
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="item_selected" from="Loader/ItemList" to="Loader" method="_on_load"]

@@ -1,0 +1,48 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scripts/ui/level_management/load/load_menu.gd" type="Script" id=1]
+
+
+
+
+[node name="LoadMenu" type="Control"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemList" type="ItemList" parent="."]
+margin_left = -224.0
+margin_top = -96.0
+margin_right = 224.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_left = -224.0
+margin_top = -128.0
+margin_right = 224.0
+margin_bottom = -96.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel"]
+margin_right = 448.0
+margin_bottom = 32.0
+text = "Select a level to load:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="item_selected" from="ItemList" to="." method="_on_load"]
