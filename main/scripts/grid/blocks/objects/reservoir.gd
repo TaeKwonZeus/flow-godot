@@ -12,10 +12,11 @@ func _process(_delta):
 
 
 func activate():
+	var pos = grid.blocks_list.get_position_by_object(self)
 	grid.leaks = 0
 	
-	var pos_below = grid.get_pos(self) + Vector2.DOWN * WORLD_MODIFIER
-	var output = grid.find_block_at_position(pos_below)
+	var pos_below = pos + Vector2.DOWN * WORLD_MODIFIER
+	var output = grid.blocks_list.get_object_by_position(pos_below)
 	
 	if not output == null and output is Pipe:
-		output.activate(grid.get_pos(self))
+		output.activate(pos)

@@ -9,4 +9,4 @@ onready var grid = get_parent()
 
 
 func _ready():
-	grid.set_pos(self, global_position)
+	grid.blocks_list.set_position(self, position)

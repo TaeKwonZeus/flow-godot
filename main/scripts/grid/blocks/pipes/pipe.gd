@@ -10,7 +10,7 @@ func _init():
 
 
 func activate(pos):
-	var own_pos = grid.get_pos(self)
+	var own_pos = grid.blocks_list.get_position_by_object(self)
 	print("Activated from position:", pos)
 	
 	var relative_input = pos - own_pos
@@ -23,7 +23,7 @@ func activate(pos):
 	
 	for output in outputs:
 		var global = own_pos + output
-		var block = grid.find_block_at_position(global)
+		var block = grid.blocks_list.get_object_by_position(global)
 		
 		if not block == null and block.is_pipe:
 			block.activate(own_pos)

@@ -6,7 +6,7 @@ export(float) var speed = 20
 
 
 func _process(_delta):
-	var target_position = grid.get_pos(self)
+	var target_position = grid.blocks_list.get_position_by_object(self)
 	var threshold = 1
 	
 	if (target_position - position).length_squared() > pow(threshold, 2):

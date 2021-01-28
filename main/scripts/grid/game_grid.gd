@@ -18,8 +18,7 @@ const TYPE_MATCH = {
 
 export var path = "res://levels/"
 var leaks = 0
-var _blocks_list = BlocksList.new()
-var _blocks = {}
+var blocks_list = BlocksList.new()
 
 
 func _ready():
@@ -27,23 +26,15 @@ func _ready():
 	emit_signal("leaks_displayed", leaks)
 
 
-func find_block_at_position(pos):
-	for block in _blocks:
-		if get_pos(block) == pos:
-			return block
-	
-	return null
-
-
 func find_blocks_at_direction(pos, direction):
 	var output = []
 	var ray = pos
-	var current = find_block_at_position(ray)
+	var current = blocks_list.get_object_by_position(ray)
 	
 	while not current == null:
 		output.append(current)
 		ray += direction
-		current = find_block_at_position(ray)
+		current = blocks_list.get_object_by_position(ray)
 		
 		if not current == null and not current is MoveableBlock:
 			return null
@@ -57,12 +48,12 @@ func request_move(pos, direction):
 	if _blocks_at_direction == null:
 		return
 	
-	for block in _blocks:
-		var local_pos = get_pos(block)
+	for block in blocks_list.object_list:
+		var local_pos = blocks_list.get_position_by_object(block)
 		if block in _blocks_at_direction:
-			set_pos(block, local_pos + direction)
+			blocks_list.set_position(block, local_pos + direction)
 		else:
-			set_pos(block, local_pos)
+			blocks_list.set_position(block, local_pos)
 
 
 func export_to_json(level_name):
@@ -81,47 +72,31 @@ func _delete_children():
 
 func load_from_json(file_path):
 	_delete_children()
-	_blocks.clear()
+	blocks_list.clear()
 	
 	var file = File.new()
 	file.open(file_path, File.READ)
 	var content = parse_json(file.get_as_text())
 	
 	for data in content:
-		var type = _blocks_list.add_block(data)
+		blocks_list.add_block(data)
 		
-		var pos = _list_to_vec(data["position"])
-		var rot = deg2rad(data["rotation"])
-		
-		var obj_instance = TYPE_MATCH[type].instance()
+		var obj_instance = TYPE_MATCH[data["type"]].instance()
 		add_child(obj_instance)
 		
-		obj_instance.position = pos
-		set_pos(obj_instance, pos)
-		obj_instance.rotation = rot
-		
-		_blocks[obj_instance] = [pos]
-
-
-func get_pos(obj):
-	if obj in _blocks:
-		return _blocks[obj][-1]
-
-
-func set_pos(obj, pos):
-	if not obj in _blocks:
-		_blocks[obj] = []
-	_blocks[obj].append(pos)
+		blocks_list.object_list.append(obj_instance)
+		obj_instance.position = _list_to_vec(data["position"])
+		obj_instance.rotation = deg2rad(data["rotation"])
 
 
 func _get_json_list():
 	var list = []
 	
-	for block in _blocks:
+	for block in range(blocks_list.object_list.size()):
 		list.append({
-			"type": block.type,
-			"position": _vec_to_list(_blocks[block][-1]),
-			"rotation": round(block.rotation_degrees)
+			"type": blocks_list._types_list[block],
+			"position": _vec_to_list(blocks_list._positions_list[block][-1]),
+			"rotation": round(rad2deg(blocks_list._rotations_list[block]))
 		})
 	
 	return list
@@ -136,6 +111,4 @@ func _list_to_vec(list):
 
 
 func undo():
-	for block in _blocks.keys():
-		if _blocks[block].size() > 1:
-			_blocks[block].pop_back()
+	pass
